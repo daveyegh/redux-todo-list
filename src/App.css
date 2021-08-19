@@ -1,0 +1,58 @@
+body {
+    font-family: "Lato";
+}
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 150px;
+}
+
+.App h2 {
+    font-size: 70px;
+}
+
+.App input {
+    padding: 16px;
+    width: 400px;
+    font-size: 19px;
+}
+
+.todos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.todo {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.todo-buttons button {
+    margin: 0 3px;
+}
+
+.all-info {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.all-info-filter button {
+    margin:  0 2px;
+    color: #fff;
+}
+
+
+.todo.completed {
+    text-decoration: line-through;
+    color: green;
+    
+}
