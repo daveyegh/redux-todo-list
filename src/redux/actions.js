@@ -1,4 +1,4 @@
-import { ADD_TODO, FILTER_ACTIVE, FILTER_COMPLETED, MARK_COMPLETE, REMOVE_TODO } from "./action-types";
+import { ADD_TODO, FILTER_ACTIVE, FILTER_ALL, FILTER_COMPLETED, MARK_COMPLETE, REMOVE_TODO } from "./action-types";
 
 export function addTodo(todo) {
     return {
@@ -14,10 +14,10 @@ export function removeTodo(id) {
     }
 }
 
-export function markComplete(id) {
+export function markComplete(item) {
     return {
         type: MARK_COMPLETE,
-        id: id
+        item: item
     }
 }
 
@@ -32,6 +32,13 @@ export function filterComplete(todos) {
 export function filterActive(todos) {
     return {
         type: FILTER_ACTIVE,
+        todos: todos
+    }
+}
+
+export function filterAll(todos) {
+    return {
+        type: FILTER_ALL,
         todos: todos
     }
 }

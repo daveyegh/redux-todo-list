@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { addTodo, removeTodo, markComplete, filterComplete } from "./redux/actions";
+import { addTodo, removeTodo, markComplete, filterComplete, filterAll, filterActive } from "./redux/actions";
 import { connect } from "react-redux";
 
 import "./App.css";
 
-function App({ todos, addTodo, removeTodo, markComplete, filterComplete }) {
+function App({ todos, filteredTodos, addTodo, removeTodo, markComplete, filterComplete, filterAll, filterActive }) {
 
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function App({ todos, addTodo, removeTodo, markComplete, filterComplete }) {
       <div className="add-todos">
         <input
           className="form-control"
-          onKeyUp={(e) => {
+          onKeyDown={(e) => {
             handleKeyDown(e);
           }}
           type="text"
@@ -37,15 +37,15 @@ function App({ todos, addTodo, removeTodo, markComplete, filterComplete }) {
         />
       </div>
       <div className="todos">
-        {todos?.map((item) => {
+        {filteredTodos?.map((item) => {
           return (
-            <div className={`todo ${item.markedComplete ? 'completed' : '' }`} key={item.id}>
+            <div className={`todo ${!item.markedComplete ? '' : 'completed' }`} key={item.id}>
               {item.title}
               <div className="todo-buttons">
                 <button onClick={() => removeTodo(item.id)} type="button" className="btn btn-danger">
                   Delete
                 </button>
-                <button onClick={() => {markComplete(item.id)}} type="button" className="btn btn-success">
+                <button onClick={() => {markComplete(item)}} type="button" className="btn btn-success">
                   Complete
                 </button>
               </div>
@@ -56,8 +56,8 @@ function App({ todos, addTodo, removeTodo, markComplete, filterComplete }) {
       <div className="all-info">
         <h5 className="all-info-title">Items Left: {todos.length}</h5>
         <div className="all-info-filter">
-          <button className="btn btn-info">All</button>
-          <button className="btn btn-info">Active</button>
+          <button onClick={() => {filterAll(todos)}} className="btn btn-info">All</button>
+          <button onClick={() => {filterActive(todos)}} className="btn btn-info">Active</button>
           <button onClick={() => {filterComplete(todos)}} className="btn btn-info">Completed</button>
         </div>
       </div>
@@ -67,7 +67,8 @@ function App({ todos, addTodo, removeTodo, markComplete, filterComplete }) {
 
 const mapStateToProps = (state) => {
   return {
-    todos: state,
+    todos: state.todos,
+    filteredTodos: state.filteredTodos,
   };
 };
 
@@ -75,7 +76,9 @@ const mapDispatchToProps = {
   addTodo,
   removeTodo,
   markComplete,
-  filterComplete
+  filterComplete,
+  filterAll,
+  filterActive
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

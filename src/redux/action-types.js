@@ -5,3 +5,4 @@ export const MARK_COMPLETE = "MARK_COMPLETE";
 //filters
 export const FILTER_COMPLETED = "FILTER_COMPLETED";
 export const FILTER_ACTIVE = "FILTER_ACTIVE"
+export const FILTER_ALL = "FILTER_ALL";
